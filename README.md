@@ -1,7 +1,7 @@
 <h1 align="center">💻 Sevs Mod Checker 💻</h1>
 
 <p align="center">
-<b>A mod checker for Gorilla Tag to view peoples, mods, cosmetics, fps, creation date, platform, and more!</b>
+<b>A mod checker for Gorilla Tag to view peoples, mods, cosmetics, fps, creation date, platform, and more!</b> <br>
 <b>Click right joystick to toggle</b>
 </p>
 
