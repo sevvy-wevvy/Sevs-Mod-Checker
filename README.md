@@ -1,7 +1,7 @@
-<h1 align="center">⏩ Gorilla Optimizer ⏩</h1>
+<h1 align="center">💻 Sevs Mod Checker 💻</h1>
 
 <p align="center">
-<b>A optimization mod for Gorilla Tag to make the game smoother with lots of configuration.</b>
+<b>A mod checker for Gorilla Tag to view peoples, mods, cosmetics, fps, creation date, platform, and more!</b>
 </p>
 
 <p align="center">
@@ -22,29 +22,10 @@
 </p>
 
 <p align="center">
-  Gorilla Optimizer is a simple yet useful optimization mod for Gorilla Tag with tons of configuration.<br>
-  I spent tons of time researching on unitys build in optimization options and optimizing the mod itself, so please enjoy.<br> <br>
+  Sevs Mod Checker is a simple mod checker to easly see if anybody in your loby is cheating, and go in depth on them.<br> <br>
   Do you like this mod? If so, please let me know!  
   <a href="https://sevvy-wevvy.com/discord">Discord</a>
 </p>
-
-<p align="center">
-<a href="https://github.com/sevvy-wevvy/Several-Bees" target="_blank" style="margin-left:10px;">
-  <img src="https://img.shields.io/badge/Several%20Bees-yellow?style=for-the-badge&label=Depends%20On&labelColor=grey" 
-       alt="Depends On Several Bees" height="19">
-</a>
-</p>
-
-<details>
-<summary align="center"><b>✅ Easy Install ✅</b></summary>
-
-<p align="center">
-To easly install Several Bees, you can use Monke Mod Manager<br>
-MMM is relitivly easy to use, below are the dowloand links for difrent operating systems.<br>
-<a href="https://github.com/The-Graze/MonkeModManager/releases/latest/download/MonkeModManager.exe">Windows</a><br>
-<a href="https://github.com/arielthemonke/MonkeModManager/releases/latest/download/MonkeModManager.Linux">Linux</a>
-</p>
-</details>
 
 <details>
 <summary align="center"><b>🛠 Pull Requests 🛠</b></summary>
@@ -89,7 +70,8 @@ As long as it works, its very likley to get accepted.
 <p align="center">
 I accept donations over few platforms, below are where you can help support my projects and more.<br>
 <b>Patreon</b> - https://sevvy-wevvy.com/patreon<br>
-<b>Ko-fi</b> - https://sevvy-wevvy.com/kofi
+<b>Ko-fi</b> - https://sevvy-wevvy.com/kofi<br>
+<b>Throne</b> - https://sevvy-wevvy.com/throne
 </p>
 </details>
 
