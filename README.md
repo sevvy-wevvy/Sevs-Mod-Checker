@@ -23,7 +23,8 @@
 </p>
 
 <p align="center">
-  Sevs Mod Checker is a simple mod checker to easly see if anybody in your loby is cheating, and go in depth on them.<br> <br>
+  Sevs Mod Checker is a simple mod checker to easly see if anybody in your loby is cheating, and go in depth on them.<br>
+  Credits to Toasty for making the PC controls!<br> <br>
   Do you like this mod? If so, please let me know!  
   <a href="https://sevvy-wevvy.com/discord">Discord</a>
 </p>
