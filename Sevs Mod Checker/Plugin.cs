@@ -9,12 +9,12 @@ using TMPro;
 using Photon.Pun;
 using GorillaNetworking;
 using System.Collections;
-using Utilla;
 using Valve.VR;
+using UnityEngine.InputSystem;
 
 namespace SevsModChecker
 {
-    [BepInPlugin("com.sev.gorillatag.SevsModChecker", "Sevs Mod Checker", "1.0.0")]
+    [BepInPlugin("com.sev.gorillatag.SevsModChecker", "Sevs Mod Checker", "1.1.0")]
     public class Plugin : BaseUnityPlugin
     {
         private void Awake()
@@ -30,14 +30,6 @@ namespace SevsModChecker
         internal GameObject SideButtons = null;
 
         internal string SelectedPlayerUserId = null;
-
-        private int GetTruePing(VRRig rig)
-        {
-            double ping = Math.Abs((rig.velocityHistoryList[0].time - PhotonNetwork.Time) * 1000);
-            int safePing = (int)Math.Clamp(Math.Round(ping), 0, int.MaxValue);
-
-            return safePing;
-        }
 
         private void CustomStart()
         {
@@ -107,6 +99,7 @@ namespace SevsModChecker
             Fps = InfoMenu.transform.Find("fps").GetComponent<TextMeshPro>();
             CreationDate = InfoMenu.transform.Find("creatoin date").GetComponent<TextMeshPro>();
             thing = InfoMenu.transform.Find("thing").gameObject;
+
             cheatPrecent = InfoMenu.transform.Find("cheat precent").GetComponent<TextMeshPro>();
             modsTiny = InfoMenu.transform.Find("mods tiny").GetComponent<TextMeshPro>();
 
@@ -143,20 +136,68 @@ namespace SevsModChecker
                 && (bool)moddedField.GetValue(rig);
         }
 
+        bool setParent = true;
+        Transform parent = null;
+        Camera thirdPersonCamera = null;
+
+        bool onPC = false;
+
+        KeyCode openKey = KeyCode.F2;
+
         internal void Update()
         {
+            if (thirdPersonCamera == null)
+            {
+                try
+                {
+                    thirdPersonCamera = GameObject.Find("Player Objects/Third Person Camera/Shoulder Camera").GetComponent<Camera>();
+                }
+                catch
+                {
+                    thirdPersonCamera = GameObject.Find("Shoulder Camera").GetComponent<Camera>();
+                }
+            }
+
             PlayerlIstGameNetwroking = PhotonNetwork.PlayerListOthers;
 
-            if (SteamVR_Actions.gorillaTag_LeftJoystickClick.GetState(SteamVR_Input_Sources.LeftHand) && !MenuToogleDone)
+            if ((SteamVR_Actions.gorillaTag_LeftJoystickClick.GetState(SteamVR_Input_Sources.LeftHand) || UnityInput.Current.GetKeyDown(openKey)) && !MenuToogleDone)
             {
+                if (UnityInput.Current.GetKeyDown(openKey)) onPC = true;
+                else if (SteamVR_Actions.gorillaTag_LeftJoystickClick.GetState(SteamVR_Input_Sources.LeftHand)) onPC = false;
+
                 go.SetActive(!go.activeSelf);
                 MenuToogleDone = true;
             }
-            if (!SteamVR_Actions.gorillaTag_LeftJoystickClick.GetState(SteamVR_Input_Sources.LeftHand)) MenuToogleDone = false;
+            if (!(SteamVR_Actions.gorillaTag_LeftJoystickClick.GetState(SteamVR_Input_Sources.LeftHand) || UnityInput.Current.GetKeyDown(openKey))) MenuToogleDone = false;
             if (go.activeSelf)
             {
-                go.transform.position = GorillaTagger.Instance.leftHandTransform.position + GorillaTagger.Instance.leftHandTransform.right * 0.16f;
-                go.transform.rotation = GorillaTagger.Instance.leftHandTransform.rotation * Quaternion.Euler(20f, 180f, 10f);
+                if (parent == null && setParent)
+                {
+                    parent = go.transform.parent;
+                    setParent = false;
+                }
+                if (onPC)
+                {
+                    go.transform.parent = thirdPersonCamera.transform;
+                    go.transform.position = thirdPersonCamera.transform.position + thirdPersonCamera.transform.forward * 0.5f;
+                    go.transform.rotation = thirdPersonCamera.transform.rotation * Quaternion.Euler(90f, 180f, 0f);
+
+                    if (Mouse.current.leftButton.isPressed)
+                    {
+                        if (Physics.Raycast(thirdPersonCamera.ScreenPointToRay(Mouse.current.position.ReadValue()), out RaycastHit hitInfo, 512, ~(1 << LayerMask.NameToLayer("TransparentFX") | 1 << LayerMask.NameToLayer("Ignore Raycast") | 1 << LayerMask.NameToLayer("Zone") | 1 << LayerMask.NameToLayer("Gorilla Trigger") | 1 << LayerMask.NameToLayer("Gorilla Boundary") | 1 << LayerMask.NameToLayer("GorillaCosmetics") | 1 << LayerMask.NameToLayer("GorillaParticle"))))
+                        {
+                            Button button = hitInfo.transform.gameObject.GetComponent<Button>();
+
+                            if (button != null) button.CustomClick();
+                        }
+                    }
+                }
+                else
+                {
+                    go.transform.parent = parent;
+                    go.transform.position = GorillaTagger.Instance.leftHandTransform.position + GorillaTagger.Instance.leftHandTransform.right * 0.16f;
+                    go.transform.rotation = GorillaTagger.Instance.leftHandTransform.rotation * Quaternion.Euler(20f, 180f, 10f);
+                }
             }
 
             if (!HasStarted) return;

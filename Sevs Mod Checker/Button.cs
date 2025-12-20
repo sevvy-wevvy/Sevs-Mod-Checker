@@ -25,5 +25,14 @@ namespace SevsModChecker
                 Click?.Invoke(true);
             }
         }
+
+        public void CustomClick()
+        {
+            if (Time.time > LastPress + Debounce)
+            {
+                LastPress = Time.time;
+                Click?.Invoke(true);
+            }
+        }
     }
 }
