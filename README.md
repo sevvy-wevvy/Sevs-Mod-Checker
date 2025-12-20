@@ -2,7 +2,7 @@
 
 <p align="center">
 <b>A mod checker for Gorilla Tag to view peoples, mods, cosmetics, fps, creation date, platform, and more!</b> <br>
-<b>Click right joystick to toggle</b>
+<b>Click right joystick to toggle, F2 for PC</b>
 </p>
 
 <p align="center">
